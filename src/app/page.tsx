@@ -1,40 +1,59 @@
 import Link from "next/link";
 import Image from "next/image";
 import Navbar from "@/components/Navbar";
-import { IT_CATEGORIES, HW_CATEGORIES } from "@/lib/categories";
 
 const usps = [
   {
     icon: "🎥",
-    title: "Der Mensch vor dem Lebenslauf",
-    text: "Ein 60-Sekunden Video sagt mehr als jeder Lebenslauf. Zeig wer du wirklich bist und finde Unternehmen die genau dich suchen.",
+    title: "Dein Video Pitch. Deine Persönlichkeit.",
+    text: "Ein 60-Sekunden Video sagt mehr als jeder Lebenslauf. Zeig wer du wirklich bist – nicht was du auf Papier bist. Unternehmen sehen den Menschen hinter den Qualifikationen.",
     color: "brand-it",
   },
   {
     icon: "🤖",
-    title: "KI-Matching das wirklich passt",
-    text: "Unser KI-Algorithmus vergleicht Skills, Gehaltswünsche und Region und zeigt dir einen Match-Score von 0 bis 100%. Transparent. Erklärbar. Fair.",
+    title: "KI-Matching das wirklich passt.",
+    text: "Unser Algorithmus vergleicht Skills, Gehalt und Region und gibt dir einen ehrlichen Match-Score von 0 bis 100%. Keine Versprechen. Nur echte Übereinstimmung.",
     color: "brand-hw",
   },
   {
     icon: "💬",
-    title: "Direktkontakt. Kein Umweg.",
-    text: "Nach dem Match schreibt ihr euch direkt. Kein Vermittler. Kein Headhunter. Keine Zwischenstufe. Nur zwei Menschen die zusammenpassen.",
+    title: "Direkt. Kein Vermittler. Kein Umweg.",
+    text: "Nach dem Match schreibt ihr euch direkt. Kein Headhunter der sich einmischt. Kein Vermittler der die Wahrheit verschleiert. Nur zwei Menschen die zusammenpassen.",
     color: "brand-it",
   },
   {
     icon: "💶",
-    title: "Ein Preis. Alles drin.",
-    text: "Kein Klickpreis. Keine Provision. Keine Überraschungen. Ein fairer Monatsbeitrag für unbegrenzte Möglichkeiten.",
+    title: "Ein fairer Preis. Alles drin.",
+    text: "Kein Klickpreis. Keine Provision. Keine bösen Überraschungen. Ein monatlicher Betrag – und du hast Zugang zu allem. Weil wir glauben dass gute Arbeit einen fairen Preis verdient.",
     color: "brand-hw",
   },
 ];
 
 const steps = [
-  { n: "01", title: "Plattform wählen", desc: "CodeOnMe für IT oder HandsOnMe für Handwerk. Spezialisiert, nicht generisch.", color: "it" },
-  { n: "02", title: "Profil & Video anlegen", desc: "In 5 Minuten fertig. Dein Video-Pitch ist das Herzstück – echt, direkt, du.", color: "hw" },
-  { n: "03", title: "KI-Score erhalten", desc: "Unser Algorithmus matcht dich in Echtzeit. Transparent, erklärbar, fair.", color: "it" },
-  { n: "04", title: "Matched. Kontakt. Job.", desc: "Direkter Chat und Video-Call ohne Umwege. Vom Match zum Gespräch in Minuten.", color: "hw" },
+  {
+    n: "01",
+    title: "Profil anlegen – in 5 Minuten",
+    desc: "Kein langer Fragebogen. Kein Papierkram.\nEinfach dein Profil erstellen und deinen Video-Pitch aufnehmen.\nFertig – in unter 5 Minuten.",
+    color: "it",
+  },
+  {
+    n: "02",
+    title: "Selbst suchen oder KI übernimmt",
+    desc: "Du hast die Wahl: Suche selbst nach passenden\nJobs oder Kandidaten – oder lass unsere KI für dich arbeiten.\nDer KI-Algorithmus schlägt dir rund um die Uhr\ndie besten Matches vor. Transparent erklärt. Ehrlich bewertet.",
+    color: "hw",
+  },
+  {
+    n: "03",
+    title: "Speed Meeting – virtuell oder persönlich",
+    desc: "Beide Seiten müssen Interesse zeigen.\nErst wenn es von beiden passt wird ein Speed Meeting\nfreigeschaltet – virtuell per Video-Call oder\npersönlich vor Ort. Schnell. Unkompliziert. Menschlich.",
+    color: "it",
+  },
+  {
+    n: "04",
+    title: "Direkt einigen – Mensch zu Mensch",
+    desc: "Vom ersten Speed Meeting bis zum\nunterschriebenen Vertrag – alles direkt.\nKein Vermittler. Keine Provision.\nNur zwei Menschen die zusammenpassen.",
+    color: "hw",
+  },
 ];
 
 const pricing = [
@@ -112,9 +131,16 @@ const pricing = [
     featured: false,
     isSeeker: true,
     cta: "Kostenlos anmelden",
-    note: "Für immer kostenlos · kein Haken · kein Kleingedrucktes",
+    note: "Kostenlos – für immer. Kein Haken. Weil jeder Mensch eine faire Chance verdient.",
     href: "/register",
   },
+];
+
+const heroStats = [
+  { value: "0%",   label: "Keine Provision. Nie." },
+  { value: "KI",   label: "Match in Echtzeit" },
+  { value: "100%", label: "DSGVO-konform" },
+  { value: "0 €",  label: "Für Bewerber – immer" },
 ];
 
 export default function LandingPage() {
@@ -123,79 +149,85 @@ export default function LandingPage() {
 
       <Navbar />
 
-      {/* ── DARK HERO ── */}
-      <section className="relative bg-black flex flex-col items-center justify-center text-center px-4 py-32 overflow-hidden" style={{ minHeight: "calc(100vh - 72px)" }}>
-        {/* Subtle white dot grid */}
+      {/* ── HERO ── */}
+      <section className="relative bg-black overflow-hidden" style={{ minHeight: "calc(100vh - 72px)" }}>
         <div className="absolute inset-0 pointer-events-none" style={{ backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.03) 1px, transparent 1px)", backgroundSize: "32px 32px" }} />
-
-        {/* Orange glow orb — bottom-left */}
         <div className="absolute bottom-0 left-0 w-[700px] h-[700px] rounded-full pointer-events-none" style={{ background: "radial-gradient(circle, rgba(255,107,26,0.18) 0%, transparent 70%)", transform: "translate(-30%, 40%)" }} />
+        <div className="absolute bottom-0 right-0 w-[700px] h-[700px] rounded-full pointer-events-none" style={{ background: "radial-gradient(circle, rgba(21,101,192,0.18) 0%, transparent 70%)", transform: "translate(30%, 40%)" }} />
 
-        {/* Purple glow orb — bottom-right */}
-        <div className="absolute bottom-0 right-0 w-[700px] h-[700px] rounded-full pointer-events-none" style={{ background: "radial-gradient(circle, rgba(123,94,252,0.18) 0%, transparent 70%)", transform: "translate(30%, 40%)" }} />
-
-        <div className="relative z-10 flex flex-col items-center">
-          {/* Logo */}
-          <img
-            src="/logo.png"
-            alt="EyesOnMe Talent"
-            width={260}
-            height={260}
-            style={{
-              width: "260px",
-              height: "260px",
-              objectFit: "contain",
-              borderRadius: "20px",
-              boxShadow: "0 0 40px rgba(123,94,252,0.9), 0 0 80px rgba(255,107,26,0.6)",
-              marginBottom: "2rem",
-              display: "block",
-            }}
-          />
-
-          {/* Gradient label */}
-          <p className="gradient-text font-bold text-sm tracking-widest uppercase mb-6 animate-fade-up">
-            Menschen verbinden · Wir sehen, wer du wirklich bist.
-          </p>
-
-          {/* Headline */}
-          <h1 className="font-serif text-5xl sm:text-6xl lg:text-7xl text-white leading-tight mb-6 max-w-4xl animate-fade-up" style={{ animationDelay: "0.1s" }}>
-            Nicht ein Lebenslauf.<br />Ein Mensch.
-          </h1>
-
-          {/* Subline */}
-          <p className="text-lg sm:text-xl max-w-2xl mb-10 leading-relaxed animate-fade-up" style={{ color: "rgba(255,255,255,0.65)", animationDelay: "0.15s" }}>
-            Wir verbinden IT-Profis und Handwerker direkt mit Unternehmen.{" "}
-            <strong className="text-white">Persönlich. Transparent. Ohne Vermittler.</strong>
-          </p>
-
-          {/* CTAs */}
-          <div className="flex flex-col sm:flex-row gap-4 mb-16 animate-fade-up" style={{ animationDelay: "0.2s" }}>
-            <Link href="/register?role=company" className="btn-gradient text-white px-8 py-4 rounded-2xl font-bold text-base shadow-lg">
-              Als Firma starten
-            </Link>
-            <Link
-              href="/register"
-              className="text-white px-8 py-4 rounded-2xl font-bold text-base transition-all"
-              style={{ border: "1px solid rgba(255,255,255,0.35)" }}
-              onMouseEnter={undefined}
-            >
-              Als Bewerber anmelden – kostenlos
-            </Link>
+        <div
+          className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12 flex flex-col lg:flex-row items-center justify-between gap-16 py-20"
+          style={{ minHeight: "calc(100vh - 72px)" }}
+        >
+          {/* Logo — no wrapper, no box, no background */}
+          <div className="flex-1 flex items-center justify-center">
+            <img
+              src="/logo.png"
+              alt="EyesOnMe Talent"
+              className="hero-logo"
+              style={{ width: "min(560px, 45vw)", height: "auto", mixBlendMode: "screen", background: "transparent", display: "block" }}
+            />
           </div>
 
-          {/* Stats row */}
-          <div className="flex flex-wrap items-center justify-center gap-6 sm:gap-10 animate-fade-up" style={{ animationDelay: "0.25s" }}>
-            {[
-              { value: "0%", label: "Provision" },
-              { value: "KI-Match", label: "in Echtzeit" },
-              { value: "DSGVO", label: "konform" },
-              { value: "🇩🇪", label: "Server in Deutschland" },
-            ].map((s, i) => (
-              <div key={i} className="flex flex-col items-center gap-1">
-                <span className="text-2xl font-black text-white">{s.value}</span>
-                <span className="text-xs font-medium" style={{ color: "rgba(255,255,255,0.5)" }}>{s.label}</span>
-              </div>
-            ))}
+          {/* Text */}
+          <div className="flex-1 flex flex-col items-center lg:items-start text-center lg:text-left">
+
+            <p
+              className="animate-fade-up"
+              style={{ fontSize: "clamp(5rem, 10vw, 9rem)", fontWeight: 900, letterSpacing: "-0.04em", lineHeight: 0.9, background: "linear-gradient(135deg, #FF6B1A 0%, #1565C0 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text", display: "block", marginBottom: "0" }}
+            >
+              Menschen verbinden.
+            </p>
+
+            <h1
+              className="animate-fade-up"
+              style={{ fontSize: "clamp(1.4rem, 2.5vw, 2rem)", fontWeight: 600, color: "rgba(255,255,255,0.75)", letterSpacing: "-0.01em", marginTop: "20px", marginBottom: "2rem", display: "block", animationDelay: "0.08s" }}
+            >
+              Wir sehen wer du wirklich bist.
+            </h1>
+
+            <p
+              className="animate-fade-up"
+              style={{ fontSize: "1.1rem", color: "rgba(255,255,255,0.45)", lineHeight: 1.8, maxWidth: "480px", marginBottom: "2.5rem", animationDelay: "0.14s" }}
+            >
+              Jeder Mensch hat eine Geschichte.<br />
+              Jeder Mensch hat eine Leidenschaft.<br />
+              Wir bringen zusammen was wirklich zusammengehört.
+            </p>
+
+            {/* Apple pill CTAs */}
+            <div
+              className="flex flex-col sm:flex-row animate-fade-up"
+              style={{ gap: "0.75rem", animationDelay: "0.2s" }}
+            >
+              <Link
+                href="/register?role=company"
+                className="text-center hover:opacity-85 transition-opacity"
+                style={{ background: "white", color: "black", padding: "16px 36px", borderRadius: "980px", fontSize: "17px", fontWeight: 600, display: "inline-block" }}
+              >
+                Als Betrieb starten
+              </Link>
+              <Link
+                href="/register"
+                className="text-center hover:bg-white/15 transition-colors"
+                style={{ background: "rgba(255,255,255,0.1)", border: "1px solid rgba(255,255,255,0.25)", color: "white", padding: "16px 36px", borderRadius: "980px", fontSize: "17px", fontWeight: 600, display: "inline-block" }}
+              >
+                Kostenlos als Bewerber
+              </Link>
+            </div>
+
+            {/* Stats row */}
+            <div
+              className="flex flex-wrap items-start animate-fade-up"
+              style={{ gap: "2.5rem", borderTop: "1px solid rgba(255,255,255,0.08)", paddingTop: "44px", marginTop: "60px", width: "100%", animationDelay: "0.26s" }}
+            >
+              {heroStats.map((s, i) => (
+                <div key={i} className="flex flex-col" style={{ gap: "0.2rem" }}>
+                  <span style={{ fontSize: "2.2rem", fontWeight: 800, color: "white", lineHeight: 1 }}>{s.value}</span>
+                  <span style={{ fontSize: "0.8rem", color: "rgba(255,255,255,0.4)", fontWeight: 500 }}>{s.label}</span>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -212,62 +244,55 @@ export default function LandingPage() {
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
 
-            {/* CodeOnMe IT */}
-            <Link href="/register?sector=it" className="group rounded-3xl bg-white border border-border border-t-4 border-t-brand-it p-8 flex flex-col card-hover" style={{ boxShadow: "0 0 0 0 rgba(123,94,252,0)", transition: "box-shadow 0.3s ease, transform 0.2s ease" }}
-              onMouseEnter={undefined}
-            >
+            <Link href="/register?sector=it" className="group rounded-3xl bg-white border border-border border-t-4 border-t-brand-it p-10 flex flex-col card-hover">
               <div className="w-14 h-14 rounded-2xl bg-brand-it flex items-center justify-center mb-5 shadow-lg shadow-brand-it/30">
                 <svg className="w-7 h-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 7.5l3 2.25-3 2.25m4.5 0h3m-9 8.25h13.5A2.25 2.25 0 0021 18V6a2.25 2.25 0 00-2.25-2.25H5.25A2.25 2.25 0 003 6v12a2.25 2.25 0 002.25 2.25z" />
                 </svg>
               </div>
-              <span className="text-xs font-bold text-brand-it tracking-widest uppercase mb-1">IT-Professionals</span>
-              <h3 className="text-3xl font-black text-navy mb-4">Code<span className="text-brand-it">OnMe</span></h3>
-              <div className="flex flex-wrap gap-1.5 mb-6">
-                {IT_CATEGORIES.map((cat) => (
-                  <span key={cat} className="text-xs px-2.5 py-1 bg-brand-it/8 text-brand-it rounded-full font-medium">{cat}</span>
-                ))}
-              </div>
+              <span className="text-xs font-bold text-brand-it tracking-widest uppercase mb-2">IT-Professionals</span>
+              <h3 className="text-4xl font-black text-navy mb-5">Code<span className="text-brand-it">OnMe</span></h3>
+              <p className="text-base text-muted leading-relaxed mb-6 flex-1">
+                Du schreibst Code. Du löst Probleme.<br />
+                Du willst in einem Team arbeiten das dich wirklich versteht.<br />
+                Oder du suchst den Entwickler der dein Produkt zum Leben erweckt.<br />
+                Bei CodeOnMe findest du beides.
+              </p>
               <div className="flex items-center gap-2 text-sm font-bold text-brand-it mt-auto group-hover:gap-3 transition-all">
-                Jetzt starten – kostenlos
-                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-                </svg>
+                Jetzt starten – kostenlos →
               </div>
             </Link>
 
-            {/* HandsOnMe HW */}
-            <Link href="/register?sector=hw" className="group rounded-3xl bg-white border border-border border-t-4 border-t-brand-hw p-8 flex flex-col card-hover">
+            <Link href="/register?sector=hw" className="group rounded-3xl bg-white border border-border border-t-4 border-t-brand-hw p-10 flex flex-col card-hover">
               <div className="w-14 h-14 rounded-2xl bg-brand-hw flex items-center justify-center mb-5 shadow-lg shadow-brand-hw/30">
                 <svg className="w-7 h-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M11.42 15.17L17.25 21A2.652 2.652 0 0021 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 11-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 004.486-6.336l-3.276 3.277a3.004 3.004 0 01-2.25-2.25l3.276-3.276a4.5 4.5 0 00-6.336 4.486c.091 1.076-.071 2.264-.904 2.95l-.102.085m-1.745 1.437L5.909 7.5H4.5L2.25 3.75l1.5-1.5L7.5 4.5v1.409l4.26 4.26m-1.745 1.437l1.745-1.437m6.615 8.206L15.75 15.75M4.867 19.125h.008v.008h-.008v-.008z" />
                 </svg>
               </div>
-              <span className="text-xs font-bold text-brand-hw tracking-widest uppercase mb-1">Handwerk & Fachkräfte</span>
-              <h3 className="text-3xl font-black text-navy mb-4">Hands<span className="text-brand-hw">OnMe</span></h3>
-              <div className="flex flex-wrap gap-1.5 mb-6">
-                {HW_CATEGORIES.map((cat) => (
-                  <span key={cat} className="text-xs px-2.5 py-1 bg-brand-hw/8 text-brand-hw rounded-full font-medium">{cat}</span>
-                ))}
-              </div>
+              <span className="text-xs font-bold text-brand-hw tracking-widest uppercase mb-2">Handwerk & Fachkräfte</span>
+              <h3 className="text-4xl font-black text-navy mb-5">Hands<span className="text-brand-hw">OnMe</span></h3>
+              <p className="text-base text-muted leading-relaxed mb-6 flex-1">
+                Du schaffst mit deinen Händen etwas Bleibendes.<br />
+                Dein Handwerk ist dein Stolz – und dein Betrieb deine Lebensaufgabe.<br />
+                HandsOnMe bringt Fachkräfte und Betriebe direkt zusammen.<br />
+                Ohne Umwege. Ohne Provision. Auf Augenhöhe.
+              </p>
               <div className="flex items-center gap-2 text-sm font-bold text-brand-hw mt-auto group-hover:gap-3 transition-all">
-                Als Bewerber anmelden – immer kostenlos
-                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-                </svg>
+                Jetzt starten – kostenlos →
               </div>
             </Link>
           </div>
         </div>
       </section>
 
-      {/* ── USP SECTION ── */}
+      {/* ── USP ── */}
       <section className="py-24 px-4 bg-warm-gray">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
             <span className="text-xs font-bold tracking-widest uppercase text-brand-it mb-3 block">Warum EyesOnMe Talent?</span>
-            <h2 className="font-serif text-4xl sm:text-5xl text-navy mb-4">
-              Weil hinter jedem Job<br className="hidden sm:block" /> ein Mensch steckt.
+            <h2 className="font-serif text-4xl sm:text-5xl text-navy">
+              Warum tausende Fachkräfte und Betriebe<br className="hidden sm:block" />
+              EyesOnMe Talent vertrauen.
             </h2>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
@@ -287,27 +312,49 @@ export default function LandingPage() {
       </section>
 
       {/* ── MANIFESTO ── */}
-      <section className="py-24 px-4 bg-white">
-        <div className="max-w-3xl mx-auto">
-          <span className="text-xs font-bold tracking-widest uppercase text-brand-it mb-4 block">Unser Versprechen</span>
-          <h2 className="font-serif text-4xl sm:text-5xl text-navy mb-8 leading-tight">
-            Wir sehen den Menschen.<br />
-            <span className="text-brand-it">Nicht nur den Lebenslauf.</span>
+      <section className="py-28 px-4" style={{ background: "linear-gradient(160deg, #050A14 0%, #0D1B3E 100%)" }}>
+        <div className="max-w-3xl mx-auto text-center">
+          <h2
+            className="font-serif text-white mb-10 leading-tight"
+            style={{ fontSize: "clamp(2.5rem, 5vw, 4rem)", fontWeight: 900 }}
+          >
+            Hinter jedem Job<br />steckt ein Mensch.
           </h2>
-          <div className="flex flex-col gap-5 text-muted text-lg leading-relaxed">
-            <p>
-              EyesOnMe Talent wurde gegründet weil wir glauben dass Recruiting menschlicher sein kann.
-              Nicht anonym. Nicht kalt. Nicht bürokratisch.
-            </p>
-            <p>
-              Jeder Handwerker hat eine Geschichte. Jeder Entwickler hat eine Leidenschaft.
-              Jedes Unternehmen sucht nicht nur Qualifikationen sondern Menschen die wirklich passen.
-            </p>
-            <p className="font-semibold text-navy">
-              Deshalb steht bei uns der Mensch im Mittelpunkt. Immer.
-            </p>
-          </div>
-          <p className="mt-8 text-sm font-bold text-navy">— Das Team von EyesOnMe Talent</p>
+          <p
+            className="mx-auto mb-10"
+            style={{ fontSize: "1.2rem", color: "rgba(255,255,255,0.65)", lineHeight: 1.9, maxWidth: "680px" }}
+          >
+            Nicht eine Bewerbernummer. Nicht ein Lebenslauf.<br />
+            Ein Mensch mit einer Geschichte, mit Träumen und mit Talent.<br />
+            <br />
+            Wir haben EyesOnMe Talent gegründet weil wir glauben<br />
+            dass Recruiting menschlicher sein kann.<br />
+            Direkter. Fairer. Echter.<br />
+            <br />
+            Du verdienst es gesehen zu werden – nicht nur gefunden.
+          </p>
+          <p style={{ fontSize: "0.95rem", color: "rgba(255,255,255,0.35)", fontWeight: 500 }}>
+            — Das Team von EyesOnMe Talent, Baden-Württemberg
+          </p>
+        </div>
+      </section>
+
+      {/* ── HUMAN CONNECTION IMAGE ── */}
+      <section style={{ width: "100%", position: "relative", overflow: "hidden", height: "520px" }}>
+        <img
+          src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=1400&h=520&fit=crop&crop=center"
+          alt="Menschen verbinden"
+          style={{ width: "100%", height: "100%", objectFit: "cover" }}
+        />
+        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(135deg, rgba(21,101,192,0.75) 0%, rgba(255,107,26,0.6) 100%)" }} />
+        <div style={{ position: "absolute", inset: 0, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", textAlign: "center", padding: "0 32px" }}>
+          <h2 style={{ fontFamily: "DM Serif Display, serif", fontSize: "clamp(2rem,5vw,4rem)", color: "white", fontWeight: 400, marginBottom: 16, lineHeight: 1.1 }}>
+            Wir bringen zusammen<br />was zusammengehört.
+          </h2>
+          <p style={{ fontSize: "1.2rem", color: "rgba(255,255,255,0.8)", maxWidth: 560, lineHeight: 1.7 }}>
+            Direkt. Persönlich. Ohne Vermittler.<br />
+            Weil hinter jedem Job ein Mensch steckt.
+          </p>
         </div>
       </section>
 
@@ -316,18 +363,18 @@ export default function LandingPage() {
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-16">
             <span className="text-xs font-bold tracking-widest uppercase text-brand-it mb-3 block">So einfach</span>
-            <h2 className="font-serif text-4xl sm:text-5xl text-navy">In 4 Schritten zum nächsten Kapitel.</h2>
+            <h2 className="font-serif text-4xl sm:text-5xl text-navy">So einfach war Recruiting noch nie.</h2>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {steps.map((s) => (
-              <div key={s.n} className="bg-white rounded-3xl p-6 border border-border shadow-sm card-hover text-center">
-                <div className={`w-16 h-16 rounded-2xl mx-auto flex items-center justify-center mb-4 text-2xl font-black ${
+              <div key={s.n} className="bg-white rounded-3xl p-6 border border-border shadow-sm card-hover">
+                <div className={`w-16 h-16 rounded-2xl flex items-center justify-center mb-4 text-2xl font-black ${
                   s.color === "it" ? "bg-brand-it-light text-brand-it border border-brand-it/20" : "bg-brand-hw-light text-brand-hw border border-brand-hw/20"
                 }`}>
                   {s.n}
                 </div>
                 <h3 className="font-black text-navy text-base mb-2">{s.title}</h3>
-                <p className="text-xs text-muted leading-relaxed">{s.desc}</p>
+                <p className="text-xs text-muted leading-relaxed whitespace-pre-line">{s.desc}</p>
               </div>
             ))}
           </div>
@@ -348,14 +395,18 @@ export default function LandingPage() {
           <div className="text-center mb-12">
             <span className="text-xs font-bold tracking-widest uppercase text-brand-it mb-3 block">Transparente Preise</span>
             <h2 className="font-serif text-4xl sm:text-5xl text-navy mb-4">Transparent. Fair. Für Menschen.</h2>
-            <p className="text-muted text-lg max-w-2xl mx-auto">Ein fairer Monatsbeitrag. Keine versteckten Kosten. Keine Provision. Nie.</p>
+            <p className="text-muted text-lg max-w-2xl mx-auto leading-relaxed">
+              Kein Kleingedrucktes. Keine versteckten Kosten.<br />
+              Kein Klickpreis. Keine Provision – nie.<br />
+              Ein fairer Monatsbeitrag – und du hast Zugang zu allem.
+            </p>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {pricing.map((p) => {
               if (p.featured) {
                 return (
-                  <div key={p.name} className="relative lg:scale-105 rounded-3xl p-[2px]" style={{ background: "linear-gradient(135deg, #FF6B1A 0%, #7B5EFC 100%)" }}>
+                  <div key={p.name} className="relative lg:scale-105 rounded-3xl p-[2px]" style={{ background: "linear-gradient(135deg, #FF6B1A 0%, #1565C0 100%)" }}>
                     <div className="bg-navy rounded-[22px] p-6 flex flex-col h-full">
                       <div className="inline-flex self-start px-3 py-1 rounded-full text-xs font-bold mb-4 bg-brand-hw text-white">
                         ⭐ {p.badge}
@@ -428,28 +479,40 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* ── DSGVO TRUST STRIP ── */}
-      <section className="py-14 px-4 border-t border-border bg-warm-gray">
-        <div className="max-w-5xl mx-auto flex flex-wrap justify-center gap-10 text-center">
-          {[
-            { icon: "🔒", label: "DSGVO-konform", sub: "EU-Server · Deutschland" },
-            { icon: "🚫", label: "Kein Tracking", sub: "Keine Datenweitergabe" },
-            { icon: "🏦", label: "EU-Datenschutz", sub: "Art. 13/14 DSGVO" },
-            { icon: "⚡", label: "Echtzeit-Matching", sub: "KI analysiert sofort" },
-          ].map((item) => (
-            <div key={item.label} className="flex flex-col items-center gap-1.5">
-              <span className="text-2xl">{item.icon}</span>
-              <span className="text-sm font-bold text-navy">{item.label}</span>
-              <span className="text-xs text-muted">{item.sub}</span>
-            </div>
-          ))}
+      {/* ── TRUST STRIP ── */}
+      <section className="py-16 px-4 border-t border-border bg-warm-gray">
+        <div className="max-w-5xl mx-auto">
+          <h3 className="font-serif text-2xl sm:text-3xl text-navy text-center mb-10">
+            Deine Daten. Dein Vertrauen. Unser Versprechen.
+          </h3>
+          <div className="flex flex-wrap justify-center gap-10 text-center">
+            {[
+              { icon: "🔒", label: "DSGVO-konform",         sub: "Wir halten uns an jede Regel" },
+              { icon: "🇩🇪", label: "Server in Deutschland", sub: "Deine Daten bleiben in Deutschland" },
+              { icon: "🚫", label: "Kein Tracking",          sub: "Keine Datenweitergabe an Dritte" },
+              { icon: "💚", label: "Bewerber kostenlos",     sub: "Für immer. Versprochen." },
+            ].map((item) => (
+              <div key={item.label} className="flex flex-col items-center gap-1.5">
+                <span className="text-2xl">{item.icon}</span>
+                <span className="text-sm font-bold text-navy">{item.label}</span>
+                <span className="text-xs text-muted">{item.sub}</span>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* ── DARK FOOTER ── */}
+      {/* ── FOOTER ── */}
       <footer className="bg-black py-16 px-4">
         <div className="max-w-5xl mx-auto flex flex-col items-center gap-6">
-          <Image src="/logo.png" width={80} height={80} alt="EyesOnMe Talent" className="logo-image" style={{ mixBlendMode: "screen", background: "transparent", border: "none", borderRadius: "12px" }} />
+          <Image
+            src="/logo.png"
+            width={80}
+            height={80}
+            alt="EyesOnMe Talent"
+            className="logo-image"
+            style={{ mixBlendMode: "screen", background: "transparent", border: "none", borderRadius: "12px" }}
+          />
           <p className="gradient-text font-black text-xl text-center">
             Menschen verbinden. Wir sehen, wer du wirklich bist.
           </p>

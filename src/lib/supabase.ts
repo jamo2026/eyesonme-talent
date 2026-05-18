@@ -1,36 +1,13 @@
-import { createClient } from '@supabase/supabase-js'
+import { createBrowserClient } from '@supabase/ssr'
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-
-export const supabase = createClient(supabaseUrl, supabaseAnonKey)
-
-export type Database = {
-  public: {
-    Tables: {
-      profiles: {
-        Row: Profile
-        Insert: Omit<Profile, 'created_at'>
-        Update: Partial<Omit<Profile, 'id' | 'created_at'>>
-      }
-      jobs: {
-        Row: Job
-        Insert: Omit<Job, 'id' | 'created_at'>
-        Update: Partial<Omit<Job, 'id' | 'created_at'>>
-      }
-      matches: {
-        Row: Match
-        Insert: Omit<Match, 'id' | 'created_at'>
-        Update: Partial<Omit<Match, 'id' | 'created_at'>>
-      }
-      messages: {
-        Row: Message
-        Insert: Omit<Message, 'id' | 'created_at'>
-        Update: Partial<Omit<Message, 'id' | 'created_at'>>
-      }
-    }
-  }
-}
+// createBrowserClient stores the session in cookies so the server-side
+// middleware (proxy.ts) can read it via createServerClient.
+// Do NOT switch back to createClient — that uses localStorage which the
+// middleware cannot access, causing an infinite login redirect loop.
+export const supabase = createBrowserClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+)
 
 export type Profile = {
   id: string

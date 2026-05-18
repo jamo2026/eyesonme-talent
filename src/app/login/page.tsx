@@ -2,9 +2,20 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { Suspense, useState, useEffect } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import { supabase } from "@/lib/supabase";
+
+// Isolated so useSearchParams is inside Suspense
+function UrlErrorReader({ onError }: { onError: (msg: string) => void }) {
+  const searchParams = useSearchParams();
+  useEffect(() => {
+    if (searchParams.get("error") === "email_verification_failed") {
+      onError("E-Mail-Verifizierung fehlgeschlagen. Bitte versuche es erneut oder registriere dich neu.");
+    }
+  }, [searchParams, onError]);
+  return null;
+}
 
 export default function LoginPage() {
   const router = useRouter();
@@ -27,24 +38,69 @@ export default function LoginPage() {
     setLoading(true);
     setError(null);
 
-    const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+    try {
+      const { data, error } = await Promise.race([
+        supabase.auth.signInWithPassword({ email, password }),
+        new Promise<never>((_, reject) =>
+          setTimeout(() => reject(new Error("TIMEOUT")), 12000)
+        ),
+      ]);
 
-    if (error) {
+      if (error) {
+        const msg =
+          error.message === "Invalid login credentials"
+            ? "E-Mail oder Passwort falsch. Bitte versuche es erneut."
+            : error.message === "Email not confirmed"
+            ? "Bitte bestätige zuerst deine E-Mail-Adresse. Schau in deinen Posteingang."
+            : error.message;
+        setError(msg);
+        setLoading(false);
+        return;
+      }
+
+      if (!data.user) {
+        setError("Login fehlgeschlagen. Bitte versuche es erneut.");
+        setLoading(false);
+        return;
+      }
+
+      const role = (data.user.user_metadata?.role as string) ?? "seeker";
+      const sector = (data.user.user_metadata?.sector as string) ?? "it";
+
+      // Fire-and-forget: upsert profile row.
+      // Silently ignored if the profiles table doesn't exist yet.
+      supabase.from("profiles").upsert(
+        {
+          id: data.user.id,
+          email: data.user.email ?? "",
+          full_name: data.user.user_metadata?.full_name ?? "",
+          role,
+          sector,
+          categories: data.user.user_metadata?.categories ?? [],
+          updated_at: new Date().toISOString(),
+        },
+        { onConflict: "id" }
+      );
+
+      setLoading(false);
+      router.push(role === "company" ? "/dashboard/company" : "/dashboard/seeker");
+    } catch (err) {
+      const isTimeout = err instanceof Error && err.message === "TIMEOUT";
       setError(
-        error.message === "Invalid login credentials"
-          ? "E-Mail oder Passwort falsch. Bitte versuche es erneut."
-          : error.message
+        isTimeout
+          ? "Server nicht erreichbar. Bitte prüfe deine Internetverbindung und versuche es erneut."
+          : "Ein unerwarteter Fehler ist aufgetreten. Bitte versuche es erneut."
       );
       setLoading(false);
-      return;
     }
-
-    const role = data.user?.user_metadata?.role;
-    router.push(role === "company" ? "/dashboard/company" : "/dashboard/seeker");
   };
 
   return (
     <main className="min-h-screen bg-warm-gray flex flex-col overflow-x-hidden">
+      {/* Reads ?error= from URL without blocking SSR */}
+      <Suspense fallback={null}>
+        <UrlErrorReader onError={setError} />
+      </Suspense>
 
       {/* Dark header */}
       <div className="bg-black px-4 py-8 flex flex-col items-center border-b border-white/10">

@@ -9,12 +9,12 @@ interface ScoreRingProps {
 }
 
 const ringColor: Record<string, string> = {
-  it: "#7B5EFC",
+  it: "#1565C0",
   hw: "#FF6B1A",
 };
 
 const trackColor: Record<string, string> = {
-  it: "#ede9fe",
+  it: "#E3F0FF",
   hw: "#ffedd5",
 };
 
