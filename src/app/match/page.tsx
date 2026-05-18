@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import Navbar from "@/components/Navbar";
+import AppLayout from "@/components/AppLayout";
 import Link from "next/link";
 
 interface MatchCard {
@@ -75,8 +75,7 @@ export default function MatchPage() {
   };
 
   return (
-    <div className="min-h-screen bg-warm-gray">
-      <Navbar />
+    <AppLayout>
 
       <div className="max-w-md mx-auto px-4 py-6">
         {/* Header */}
@@ -227,6 +226,6 @@ export default function MatchPage() {
           </div>
         )}
       </div>
-    </div>
+    </AppLayout>
   );
 }

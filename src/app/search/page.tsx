@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import Navbar from "@/components/Navbar";
+import AppLayout from "@/components/AppLayout";
 import ScoreRing from "@/components/ScoreRing";
 import SectorBadge from "@/components/SectorBadge";
 import Link from "next/link";
@@ -59,8 +59,7 @@ export default function SearchPage() {
   };
 
   return (
-    <div className="min-h-screen bg-warm-gray">
-      <Navbar sector={sector} />
+    <AppLayout>
 
       {/* Dark search hero */}
       <section className="bg-black px-4 py-12 relative overflow-hidden">
@@ -231,6 +230,6 @@ export default function SearchPage() {
           </div>
         </div>
       </div>
-    </div>
+    </AppLayout>
   );
 }

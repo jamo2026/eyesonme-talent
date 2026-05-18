@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import Navbar from "@/components/Navbar";
+import AppLayout from "@/components/AppLayout";
 import Link from "next/link";
 
 const IT_SKILLS = ["React", "TypeScript", "Node.js", "Python", "Vue.js", "PHP", "Java", "SQL", "Docker", "AWS", "Figma", "DevOps", "Git"];
@@ -47,8 +47,7 @@ export default function NewJobPage() {
 
   if (done) {
     return (
-      <div className="min-h-screen bg-warm-gray">
-        <Navbar />
+      <AppLayout>
         <div className="max-w-sm mx-auto px-4 py-20 text-center">
           <div className="text-7xl mb-5">🎉</div>
           <h1 className="text-2xl font-black text-navy mb-2">Stelle ist live!</h1>
@@ -64,13 +63,12 @@ export default function NewJobPage() {
             </button>
           </div>
         </div>
-      </div>
+      </AppLayout>
     );
   }
 
   return (
-    <div className="min-h-screen bg-warm-gray">
-      <Navbar />
+    <AppLayout>
 
       <div className="max-w-lg mx-auto px-4 py-8">
         <div className="mb-6">
@@ -178,6 +176,6 @@ export default function NewJobPage() {
           )}
         </div>
       </div>
-    </div>
+    </AppLayout>
   );
 }

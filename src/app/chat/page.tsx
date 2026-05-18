@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import Navbar from "@/components/Navbar";
+import AppLayout from "@/components/AppLayout";
 import ScoreRing from "@/components/ScoreRing";
 
 type Message = {
@@ -51,8 +51,7 @@ export default function ChatPage() {
   const accent = sector === "it" ? "bg-brand-it" : "bg-brand-hw";
 
   return (
-    <div className="min-h-screen bg-warm-gray flex flex-col">
-      <Navbar sector={sector} />
+    <AppLayout>
 
       {/* In-call overlay */}
       {inCall && (
@@ -257,6 +256,6 @@ export default function ChatPage() {
           </div>
         </div>
       </div>
-    </div>
+    </AppLayout>
   );
 }

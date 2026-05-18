@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { supabase } from "@/lib/supabase";
-import Navbar from "@/components/Navbar";
+import AppLayout from "@/components/AppLayout";
 import VideoPlayer from "@/components/VideoPlayer";
 
 type Sector = "it" | "hw";
@@ -69,12 +69,11 @@ export default function MyProfilePage() {
 
   if (!loaded) {
     return (
-      <div className="min-h-screen bg-warm-gray">
-        <Navbar />
+      <AppLayout>
         <div className="flex items-center justify-center py-32">
           <div className="w-8 h-8 rounded-full border-4 border-brand-it border-t-transparent animate-spin" />
         </div>
-      </div>
+      </AppLayout>
     );
   }
 
@@ -86,9 +85,7 @@ export default function MyProfilePage() {
   const pct = Math.round((doneCnt / checklist.length) * 100);
 
   return (
-    <div className="min-h-screen bg-warm-gray">
-      <Navbar />
-
+    <AppLayout>
       <div className="max-w-2xl mx-auto px-4 py-6 pb-10">
 
         {/* Page header + demo toggle */}
@@ -277,6 +274,6 @@ export default function MyProfilePage() {
         </div>
 
       </div>
-    </div>
+    </AppLayout>
   );
 }
